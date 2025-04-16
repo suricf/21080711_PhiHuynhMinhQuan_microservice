@@ -1,18 +1,18 @@
 ```mermaid
-graph TD
-    Client[💻 Client] -->|HTTP Requests| Gateway[🚪 API Gateway]
+graph LR
+    Client[💻 Client] --> Gateway[🚪 API Gateway]
 
-    Gateway -->|🔍 Service Lookup| Registry[📘 Service Registry]
-    Gateway -->|➡️ Forward Request| UserService[👤 User Service]
-    Gateway -->|➡️ Forward Request| ProductService[📦 Product Service]
+    Gateway --> Registry[📘 Service Registry]
+    Gateway --> UserService[👤 User Service]
+    Gateway --> ProductService[📦 Product Service]
 
-    UserService -->|📝 Register| Registry
-    ProductService -->|📝 Register| Registry
+    UserService --> Registry
+    ProductService --> Registry
 
-    subgraph "🔄 Service Communication"
-        Registry -- 🔎 Service Discovery --> Gateway
-        UserService -- ❤️ Health Check --> Registry
-        ProductService -- ❤️ Health Check --> Registry
+    subgraph 🔄 Service Communication
+        Registry --> Gateway
+        UserService --> Registry
+        ProductService --> Registry
     end
 ```
 # Build và khởi động toàn bộ dịch vụ
