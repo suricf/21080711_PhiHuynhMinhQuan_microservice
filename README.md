@@ -1,20 +1,19 @@
-```mermaid
+mermaid
 graph LR
-    Client[💻 Client] --> Gateway[🚪 API Gateway]
+    Client[💻 Client] -->|HTTP Requests| Gateway[🚪 API Gateway]
 
-    Gateway --> Registry[📘 Service Registry]
-    Gateway --> UserService[👤 User Service]
-    Gateway --> ProductService[📦 Product Service]
+    Gateway -->|🔍 Service Lookup| Registry[📘 Service Registry]
+    Gateway -->|➡️ Forward Request| UserService[👤 User Service]
+    Gateway -->|➡️ Forward Request| ProductService[📦 Product Service]
 
-    UserService --> Registry
-    ProductService --> Registry
+    UserService -->|📝 Register| Registry
+    ProductService -->|📝 Register| Registry
 
-    subgraph 🔄 Service Communication
-        Registry --> Gateway
-        UserService --> Registry
-        ProductService --> Registry
+    subgraph "🔄 Service Communication"
+        Registry -- 🔎 Service Discovery --> Gateway
+        UserService -- ❤️ Health Check --> Registry
+        ProductService -- ❤️ Health Check --> Registry
     end
-```
 # Build và khởi động toàn bộ dịch vụ
 docker-compose up --build
 GET http://localhost:8761/services
