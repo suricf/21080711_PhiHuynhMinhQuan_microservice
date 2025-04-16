@@ -1,0 +1,36 @@
+version: "3"
+services:
+  service-registry:
+    build: ./service-registry
+    ports:
+      - "8761:8761"
+    environment:
+      - NODE_ENV=development
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=development
+      - SERVICE_REGISTRY_URL=http://service-registry:8761
+    depends_on:
+      - service-registry
+
+  user-service:
+    build: ./user-service
+    environment:
+      - NODE_ENV=development
+      - SERVICE_REGISTRY_URL=http://service-registry:8761
+      - PORT=3000
+    depends_on:
+      - service-registry
+
+  product-service:
+    build: ./product-service
+    environment:
+      - NODE_ENV=development
+      - SERVICE_REGISTRY_URL=http://service-registry:8761
+      - PORT=3001
+    depends_on:
+      - service-registry
