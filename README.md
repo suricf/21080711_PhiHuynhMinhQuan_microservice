@@ -1,6 +1,7 @@
+## 🧩 Kiến trúc hệ thống
+
 ```mermaid
-mermaid
-graph TD
+graph LR
     Client[💻 Client] -->|HTTP Requests| Gateway[🚪 API Gateway]
 
     Gateway -->|🔍 Service Lookup| Registry[📘 Service Registry]
