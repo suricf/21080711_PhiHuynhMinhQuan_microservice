@@ -1,3 +1,5 @@
+
+```mermaid
 mermaid
 graph LR
     Client[💻 Client] -->|HTTP Requests| Gateway[🚪 API Gateway]
@@ -14,6 +16,7 @@ graph LR
         UserService -- ❤️ Health Check --> Registry
         ProductService -- ❤️ Health Check --> Registry
     end
+```
 # Build và khởi động toàn bộ dịch vụ
 docker-compose up --build
 GET http://localhost:8761/services
