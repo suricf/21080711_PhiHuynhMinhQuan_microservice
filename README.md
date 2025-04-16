@@ -1,7 +1,6 @@
-
 ```mermaid
 mermaid
-graph LR
+graph TD
     Client[💻 Client] -->|HTTP Requests| Gateway[🚪 API Gateway]
 
     Gateway -->|🔍 Service Lookup| Registry[📘 Service Registry]
